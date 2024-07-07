@@ -1,0 +1,41 @@
+.authorCard {
+    background-color: #edf2f7;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .authorInput {
+    margin-bottom: 1rem;
+  }
+  
+  .quotesList {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .quoteItem {
+    background-color: #fff;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .quoteItem:hover {
+    transform: translateY(-3px);
+  }
+  
+  .quoteContent {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+  }
+  
+  .quoteAuthor {
+    font-size: 0.9rem;
+    color: #4a5568;
+    text-align: right;
+    font-style: italic;
+  }
