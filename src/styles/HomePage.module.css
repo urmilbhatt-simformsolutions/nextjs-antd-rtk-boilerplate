@@ -1,17 +1,17 @@
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-  
-  .title {
-    color: #2d3748;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  
-  .componentSpace {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.title {
+  color: #2d3748;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.componentSpace {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

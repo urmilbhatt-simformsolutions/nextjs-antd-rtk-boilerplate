@@ -1,41 +1,43 @@
-.authorCard {
-    background-color: #edf2f7;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .authorInput {
-    margin-bottom: 1rem;
-  }
-  
-  .quotesList {
-    max-height: 400px;
-    overflow-y: auto;
-  }
-  
-  .quoteItem {
-    background-color: #fff;
-    border-radius: 6px;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .quoteItem:hover {
-    transform: translateY(-3px);
-  }
-  
-  .quoteContent {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #2d3748;
-    margin-bottom: 0.5rem;
-  }
-  
-  .quoteAuthor {
-    font-size: 0.9rem;
-    color: #4a5568;
-    text-align: right;
-    font-style: italic;
-  }
+.card {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.listItem {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 0;
+}
+
+.listItem:last-child {
+  border-bottom: none;
+}
+
+.quoteContent {
+  color: var(--text-primary);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.quoteAuthor {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-align: right;
+  font-style: italic;
+}

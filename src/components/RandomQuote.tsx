@@ -1,68 +1,78 @@
-import React, { useMemo } from 'react'
-import { Card, Button, Spin } from 'antd'
-import { useGetRandomQuoteQuery } from '../lib/api'
-import { useDispatch, useSelector } from 'react-redux'
-import { addFavorite, removeFavorite, selectFavoriteQuotes, selectSelectedQuote } from '../features/quotes/quotesSlice'
-import styles from '../styles/RandomQuote.module.css'
+import React, { useMemo } from "react";
+import { Card, Button, Spin } from "antd";
+import { useGetRandomQuoteQuery } from "../lib/api";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addFavorite,
+  removeFavorite,
+  selectFavoriteQuotes,
+  selectSelectedQuote,
+} from "../features/quotes/quotesSlice";
+import styles from "../styles/RandomQuote.module.css";
 
 const RandomQuote: React.FC = () => {
-  const { data: randomQuote, error, isLoading, refetch } = useGetRandomQuoteQuery()
-  const selectedQuote = useSelector(selectSelectedQuote)
-  const dispatch = useDispatch()
-  const favoriteQuotes = useSelector(selectFavoriteQuotes)
+  const {
+    data: randomQuote,
+    error,
+    isLoading,
+    refetch,
+  } = useGetRandomQuoteQuery();
+  const selectedQuote = useSelector(selectSelectedQuote);
+  const dispatch = useDispatch();
+  const favoriteQuotes = useSelector(selectFavoriteQuotes);
 
-  const quote = selectedQuote || randomQuote
+  const quote = selectedQuote || randomQuote;
 
-  const isFavorite = quote ? favoriteQuotes.some(q => q._id === quote._id) : false
+  const isFavorite = quote
+    ? favoriteQuotes.some((q) => q._id === quote._id)
+    : false;
 
   const handleFavoriteToggle = () => {
     if (quote) {
       if (isFavorite) {
-        dispatch(removeFavorite(quote._id))
+        dispatch(removeFavorite(quote._id));
       } else {
-        dispatch(addFavorite(quote))
+        dispatch(addFavorite(quote));
       }
     }
-  }
+  };
 
-  const memoizedQuote = useMemo(() => (
-    <div className={styles.quoteContent}>
-      {isLoading ? (
-        <Spin size="large" />
-      ) : error ? (
-        <div>Error: {JSON.stringify(error)}</div>
-      ) : quote ? (
-        <>
-          <p className={styles.quoteText}>{quote.content}</p>
-          <p className={styles.quoteAuthor}>- {quote.author}</p>
-        </>
-      ) : null}
-    </div>
-  ), [isLoading, error, quote])
+  const memoizedQuote = useMemo(
+    () => (
+      <div className={styles.quoteContent}>
+        {isLoading ? (
+          <Spin size="large" />
+        ) : error ? (
+          <div>Error: {JSON.stringify(error)}</div>
+        ) : quote ? (
+          <>
+            <p className={styles.quoteText}>{quote.content}</p>
+            <p className={styles.quoteAuthor}>- {quote.author}</p>
+          </>
+        ) : null}
+      </div>
+    ),
+    [isLoading, error, quote]
+  );
 
   return (
-    <Card className={styles.quoteCard} title={selectedQuote ? "Selected Quote" : "Random Quote"}>
-        {memoizedQuote}
+    <Card
+      className={styles.quoteCard}
+      title={selectedQuote ? "Selected Quote" : "Random Quote"}
+    >
+      {memoizedQuote}
       <div className={styles.buttonContainer}>
-        <Button
-          type="primary"
-          onClick={handleFavoriteToggle}
-          className={styles.favoriteButton}
-          disabled={!quote}
-        >
-          {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+        <Button type="primary" onClick={handleFavoriteToggle} disabled={!quote}>
+          {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
         </Button>
         {!selectedQuote && (
-          <Button
-            onClick={() => refetch()}
-            className={styles.newQuoteButton}
-          >
+          <Button onClick={() => refetch()} className={styles.newQuoteButton}>
             New Quote
           </Button>
         )}
       </div>
     </Card>
-  )
-}
+  );
+};
 
-export default RandomQuote
+export default RandomQuote;
