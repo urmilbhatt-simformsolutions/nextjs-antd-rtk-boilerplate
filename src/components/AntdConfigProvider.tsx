@@ -1,21 +1,12 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { ConfigProvider, theme } from 'antd'
-import { useTheme } from 'next-themes'
+import React from "react";
+import { ConfigProvider, theme } from "antd";
 
-const AntdConfigProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { theme: currentTheme } = useTheme()
+const AntdConfigProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  return <ConfigProvider>{children}</ConfigProvider>;
+};
 
-  return (
-    <ConfigProvider
-      theme={{
-        algorithm: currentTheme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
-      }}
-    >
-      {children}
-    </ConfigProvider>
-  )
-}
-
-export default AntdConfigProvider
+export default AntdConfigProvider;
