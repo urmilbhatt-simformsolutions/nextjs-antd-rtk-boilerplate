@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Input, List, Card, Spin, Empty, Button } from "antd";
-import { useGetQuotesByAuthorQuery } from "../lib/api";
+import { useGetQuotesByAuthorQuery, Quote } from "../lib/api";
 import { useDispatch } from "react-redux";
 import { setSelectedQuote } from "../features/quotes/quotesSlice";
 import styles from "../styles/AuthorQuotes.module.css";
@@ -27,7 +27,7 @@ const AuthorQuotes: React.FC = () => {
   }, [author]);
 
   const handleSelectQuote = useCallback(
-    (quote) => {
+    (quote: Quote) => {
       dispatch(setSelectedQuote(quote));
     },
     [dispatch]
@@ -39,7 +39,7 @@ const AuthorQuotes: React.FC = () => {
         <List
           className={styles.quotesList}
           dataSource={data.results}
-          renderItem={(quote) => (
+          renderItem={(quote: Quote) => (
             <List.Item className={styles.quoteItem}>
               <div>
                 <p className={styles.quoteContent}>{quote.content}</p>
