@@ -7,6 +7,7 @@ import {
   removeFavorite,
   selectFavoriteQuotes,
   selectSelectedQuote,
+  setSelectedQuote,
 } from "../features/quotes/quotesSlice";
 import styles from "../styles/RandomQuote.module.css";
 
@@ -34,7 +35,16 @@ const RandomQuote: React.FC = () => {
       } else {
         dispatch(addFavorite(quote));
       }
+      // Update localStorage
+      const updatedFavorites = isFavorite
+        ? favoriteQuotes.filter((q) => q._id !== quote._id)
+        : [...favoriteQuotes, quote];
+      localStorage.setItem("favoriteQuotes", JSON.stringify(updatedFavorites));
     }
+  };
+
+  const handleDeselectQuote = () => {
+    dispatch(setSelectedQuote(null));
   };
 
   const memoizedQuote = useMemo(
@@ -65,7 +75,9 @@ const RandomQuote: React.FC = () => {
         <Button type="primary" onClick={handleFavoriteToggle} disabled={!quote}>
           {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
         </Button>
-        {!selectedQuote && (
+        {selectedQuote ? (
+          <Button onClick={handleDeselectQuote}>Deselect Quote</Button>
+        ) : (
           <Button onClick={() => refetch()} className={styles.newQuoteButton}>
             New Quote
           </Button>

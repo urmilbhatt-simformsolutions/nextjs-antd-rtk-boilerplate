@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-interface Quote {
+export interface Quote {
   _id: string;
   content: string;
   author: string;
@@ -11,7 +11,7 @@ interface Quote {
   dateModified: string;
 }
 
-interface QuotesResponse {
+export interface QuotesResponse {
   count: number;
   totalCount: number;
   page: number;
@@ -29,7 +29,10 @@ export const api = createApi({
     getQuotesByAuthor: builder.query<QuotesResponse, string>({
       query: (author) => `quotes?author=${encodeURIComponent(author)}`,
     }),
+    getTopQuotes: builder.query<QuotesResponse, void>({
+      query: () => 'quotes?sortBy=popularity&limit=10',
+    }),
   }),
 })
 
-export const { useGetRandomQuoteQuery, useGetQuotesByAuthorQuery } = api
+export const { useGetRandomQuoteQuery, useGetQuotesByAuthorQuery, useGetTopQuotesQuery } = api
